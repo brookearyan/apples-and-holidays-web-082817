@@ -1,3 +1,20 @@
+holiday_hash = {
+    :winter => {
+      :christmas => ["Lights", "Wreath"],
+      :new_years => ["Party Hats"]
+    },
+    :summer => {
+      :fourth_of_july => ["Fireworks", "BBQ"]
+    },
+    :fall => {
+      :thanksgiving => ["Turkey"]
+    },
+    :spring => {
+      :memorial_day => ["BBQ"]
+    }
+  }
+
+
 def second_supply_for_fourth_of_july(holiday_hash)
   holiday_hash[:summer][:fourth_of_july][1]
 end
@@ -8,28 +25,32 @@ def add_supply_to_winter_holidays(holiday_hash, supply)
   end
 end
 
-
 def add_supply_to_memorial_day(holiday_hash, supply)
-  holiday_hash[:spring][:memorial_day] << supply
+  holiday_hash[:spring][:memorial_day] = "#{supply}"
 end
 
 def add_new_holiday_with_supplies(holiday_hash, season, holiday_name, supply_array)
   holiday_hash[season][holiday_name] = supply_array
   holiday_hash
-
 end
 
 def all_winter_holiday_supplies(holiday_hash)
-  holiday_supplies[:winter].map do |holiday, supplies|
+  holiday_supplies[:winter].collect do |holiday, supplies|
     supplies
   end.flatten
+end
+
+def all_supplies_in_holidays(holiday_hash)
+  holiday_hash.each do |season, holiday|
+    puts [holiday]
+  end
 end
 
 def all_supplies_in_holidays(holiday_hash)
   holiday_supplies.each do |season, holidays|
     puts "#{season.capitalize}:"
     holidays.each do |holiday, supplies|
-      puts"  #{holiday.to_s.split('_').map {|w| w.capitalize }.join(' ') }: #{supplies.join(", ")}"
+      puts "  #{holiday.to_s.split('_').map {|w| w.capitalize }.join(' ') }: #{supplies.join(", ")}"
     end
   end
 end
